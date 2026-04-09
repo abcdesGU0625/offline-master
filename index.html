@@ -745,7 +745,7 @@ async function handleGoogleLogin() {
   }
 }
 
-
+async function handleLogout() {
   setLoading(true);
   await sbClient.auth.signOut();
   currentUser = null; pins = [];
