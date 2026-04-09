@@ -457,23 +457,6 @@ body::before{
       <input class="auth-input" id="auth-password" type="password" placeholder="至少 6 個字元" autocomplete="current-password">
     </div>
     <button class="auth-btn" id="auth-btn" onclick="handleAuth()">登入</button>
-
-    <!-- Setup guide (shown until user fills in Supabase keys) -->
-    <div class="auth-setup" id="setup-guide">
-      <div class="auth-setup-title">⚙️ 首次使用：填入你的 Supabase 設定</div>
-      <div class="setup-step">
-        將以下欄位填入後按儲存：
-        <div class="auth-field" style="margin-top:8px;">
-          <div class="auth-label">Supabase URL</div>
-          <input class="auth-input" id="sb-url" type="text" placeholder="https://xxxx.supabase.co">
-        </div>
-        <div class="auth-field">
-          <div class="auth-label">Anon Key</div>
-          <input class="auth-input" id="sb-key" type="text" placeholder="eyJhbGci...">
-        </div>
-        <button class="auth-btn" onclick="saveSupabaseConfig()" style="margin-top:4px;">儲存設定</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -682,30 +665,16 @@ body::before{
 
 <script>
 // ════════════════════════════════════════════════════════
-//  SUPABASE CONFIG  — stored in localStorage so the file
-//  itself never contains secrets
+//  SUPABASE CONFIG
 // ════════════════════════════════════════════════════════
-const SB_URL_KEY = 'sv_sb_url';
-const SB_KEY_KEY = 'sv_sb_key';
+const _SB_URL = 'https://sjcvfeojrfjvungjjdww.supabase.co';
+const _SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqY3ZmZW9qcmZqdnVuZ2pqZHd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3Mzg4MjAsImV4cCI6MjA5MTMxNDgyMH0.mImEXhJkkdzygWUL6Km417nctKszKolbjQ_a-2-dO0w';
 
 let sbClient = null;
 
 function initSupabase() {
-  const url = localStorage.getItem(SB_URL_KEY);
-  const key = localStorage.getItem(SB_KEY_KEY);
-  if (!url || !key) return false;
-  sbClient = window.supabase.createClient(url, key);
+  sbClient = window.supabase.createClient(_SB_URL, _SB_KEY);
   return true;
-}
-
-function saveSupabaseConfig() {
-  const url = document.getElementById('sb-url').value.trim();
-  const key = document.getElementById('sb-key').value.trim();
-  if (!url || !key) { showAuthErr('請填入 URL 和 Key'); return; }
-  localStorage.setItem(SB_URL_KEY, url);
-  localStorage.setItem(SB_KEY_KEY, key);
-  showToast('設定已儲存，請重新整理頁面');
-  setTimeout(() => location.reload(), 1200);
 }
 
 // ════════════════════════════════════════════════════════
@@ -1080,13 +1049,6 @@ function showToast(msg) {
 // ════════════════════════════════════════════════════════
 (async () => {
   const ready = initSupabase();
-
-  // Hide setup guide if already configured
-  if (ready) {
-    document.getElementById('setup-guide').style.display = 'none';
-  }
-
-  if (!ready) return;
 
   setLoading(true);
 
