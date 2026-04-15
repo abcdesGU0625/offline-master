@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>視野收藏家 · 林口體育館</title>
+<title>視野收藏家</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <!-- Supabase JS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -29,9 +29,147 @@ body::before{
   background-size:180px;opacity:0.5;
 }
 
+
+/* ══ HOMEPAGE ══ */
+#homepage{
+  position:fixed;inset:0;z-index:50;
+  overflow-y:auto;
+  background:linear-gradient(145deg,var(--bg-a) 0%,var(--bg-b) 48%,var(--bg-c) 100%);
+}
+.hp-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 28px 0;
+}
+.hp-logo{
+  display:flex;align-items:center;gap:10px;
+}
+.hp-logo-icon{font-size:22px;}
+.hp-logo-title{
+  font-family:'Playfair Display',serif;font-size:20px;
+  color:var(--text);letter-spacing:-0.01em;
+}
+.hp-login-btn{
+  background:var(--glass);backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);border-radius:100px;
+  padding:8px 18px;font-size:12.5px;font-weight:500;
+  color:var(--accent);cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif;
+  box-shadow:var(--glass-shadow);
+  transition:background 0.15s;
+  display:flex;align-items:center;gap:7px;
+}
+.hp-login-btn:hover{background:var(--glass-hover);}
+.hp-user-pill{
+  background:var(--glass);backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);border-radius:100px;
+  padding:6px 14px 6px 8px;font-size:12.5px;
+  color:var(--text-mid);cursor:default;
+  box-shadow:var(--glass-shadow);
+  display:none;align-items:center;gap:8px;
+}
+.hp-user-pill .hp-avatar{
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,#b5aee0,#d8a8c8);
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.hp-logout-link{
+  font-size:11.5px;color:var(--text-light);cursor:pointer;
+  margin-left:4px;
+}
+.hp-logout-link:hover{color:var(--accent);}
+
+.hp-hero{
+  text-align:center;padding:52px 24px 40px;
+}
+.hp-hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,5vw,42px);
+  color:var(--text);letter-spacing:-0.02em;
+  line-height:1.2;margin-bottom:12px;
+}
+.hp-hero-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hp-hero-sub{
+  font-size:14px;color:var(--text-mid);line-height:1.7;
+  max-width:420px;margin:0 auto;
+}
+
+.hp-section{padding:0 24px 60px;}
+.hp-section-title{
+  font-size:11px;font-weight:600;color:var(--text-light);
+  letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:18px;padding-left:2px;
+}
+.hp-venues{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;max-width:900px;margin:0 auto;
+}
+.venue-card{
+  background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid var(--glass-border);border-radius:20px;
+  padding:22px 20px;cursor:pointer;
+  box-shadow:var(--glass-shadow);
+  transition:transform 0.2s,box-shadow 0.2s,background 0.18s;
+  position:relative;overflow:hidden;
+}
+.venue-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(155,145,200,0.06),rgba(196,145,176,0.06));
+  opacity:0;transition:opacity 0.2s;
+}
+.venue-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 36px rgba(140,130,180,0.18);
+  background:var(--glass-hover);
+}
+.venue-card:hover::before{opacity:1;}
+.venue-card.coming-soon{cursor:default;opacity:0.6;}
+.venue-card.coming-soon:hover{transform:none;box-shadow:var(--glass-shadow);}
+
+.vc-icon{
+  width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(155,145,200,0.18),rgba(196,145,176,0.18));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:14px;
+}
+.vc-name{
+  font-size:15px;font-weight:600;color:var(--text);
+  margin-bottom:4px;letter-spacing:-0.01em;
+}
+.vc-location{
+  font-size:12px;color:var(--text-light);margin-bottom:12px;
+}
+.vc-meta{
+  display:flex;align-items:center;gap:10px;
+}
+.vc-pin-count{
+  font-size:11.5px;color:var(--text-mid);
+  background:rgba(155,145,200,0.12);
+  border-radius:100px;padding:3px 10px;
+  display:flex;align-items:center;gap:4px;
+}
+.vc-badge{
+  font-size:11px;color:var(--text-light);
+  background:rgba(155,145,200,0.08);
+  border:1px solid rgba(155,145,200,0.20);
+  border-radius:100px;padding:3px 10px;
+}
+.vc-arrow{
+  position:absolute;right:18px;bottom:20px;
+  font-size:18px;color:rgba(155,145,200,0.4);
+  transition:transform 0.2s,color 0.2s;
+}
+.venue-card:not(.coming-soon):hover .vc-arrow{
+  transform:translateX(3px);color:var(--accent);
+}
+
 /* ── AUTH SCREEN ── */
 #auth-screen{
-  position:fixed;inset:0;z-index:1000;
+  position:fixed;inset:0;z-index:1100;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(145deg,var(--bg-a),var(--bg-b),var(--bg-c));
 }
@@ -404,6 +542,36 @@ body::before{
 }
 .btn-del:hover{background:rgba(210,110,110,0.20);}
 
+/* ── LOGIN PROMPT MODAL ── */
+#login-modal-overlay{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(50,45,80,0.22);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.22s;
+}
+#login-modal-overlay.open{opacity:1;pointer-events:all;}
+.login-prompt{
+  background:rgba(252,252,255,0.92);backdrop-filter:blur(28px) saturate(1.6);
+  border:1px solid rgba(255,255,255,0.82);border-radius:24px;
+  padding:32px 28px 26px;width:360px;max-width:92vw;text-align:center;
+  box-shadow:0 20px 60px rgba(100,90,160,0.18);
+  transform:translateY(14px) scale(0.97);
+  transition:transform 0.28s cubic-bezier(.16,1,.3,1);
+}
+#login-modal-overlay.open .login-prompt{transform:none;}
+.login-prompt-icon{font-size:36px;margin-bottom:12px;}
+.login-prompt-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:8px;}
+.login-prompt-sub{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:22px;}
+.login-prompt-close{
+  position:absolute;top:14px;right:16px;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(155,145,200,0.14);border:none;cursor:pointer;
+  color:var(--text-mid);font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+}
+.login-prompt-close:hover{background:rgba(155,145,200,0.26);}
+.login-prompt{position:relative;}
+
 /* ── TOAST ── */
 .toast{
   position:fixed;bottom:88px;left:50%;
@@ -418,8 +586,69 @@ body::before{
 </head>
 <body>
 
+<!-- ══ HOMEPAGE ══ -->
+<div id="homepage">
+  <div class="hp-header">
+    <div class="hp-logo">
+      <div class="hp-logo-icon">📍</div>
+      <div class="hp-logo-title">視野收藏家</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="hp-login-btn" id="hp-login-btn" onclick="showLoginModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        登入 / 註冊
+      </button>
+      <div class="hp-user-pill" id="hp-user-pill">
+        <div class="hp-avatar">🐻</div>
+        <span id="hp-display-name"></span>
+        <span class="hp-logout-link" onclick="handleLogout()">登出</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hp-hero">
+    <div class="hp-hero-title">演唱會視野<br><em>一眼看清楚</em></div>
+    <div class="hp-hero-sub">蒐集各場館座位視野圖，選票不再踩雷。<br>登入後新增你的視野，幫助其他追星族。</div>
+  </div>
+
+  <div class="hp-section">
+    <div class="hp-section-title">有視野資料的場館</div>
+    <div class="hp-venues">
+
+      <div class="venue-card" onclick="enterVenue('linkou')">
+        <div class="vc-icon">🏟️</div>
+        <div class="vc-name">林口體育館</div>
+        <div class="vc-location">新北市林口區</div>
+        <div class="vc-meta">
+          <div class="vc-pin-count" id="linkou-count">📍 載入中…</div>
+        </div>
+        <div class="vc-arrow">→</div>
+      </div>
+
+      <div class="venue-card coming-soon">
+        <div class="vc-icon">🎪</div>
+        <div class="vc-name">台北小巨蛋</div>
+        <div class="vc-location">台北市松山區</div>
+        <div class="vc-meta">
+          <div class="vc-badge">即將上線</div>
+        </div>
+      </div>
+
+      <div class="venue-card coming-soon">
+        <div class="vc-icon">🏟</div>
+        <div class="vc-name">台北大巨蛋</div>
+        <div class="vc-location">台北市信義區</div>
+        <div class="vc-meta">
+          <div class="vc-badge">即將上線</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ══ AUTH SCREEN ══ -->
-<div id="auth-screen">
+<div id="auth-screen" style="display:none">
   <div class="auth-card">
     <div class="auth-logo">
       <div class="auth-logo-icon">📍</div>
@@ -461,18 +690,23 @@ body::before{
 </div>
 
 <!-- ══ MAIN APP ══ -->
-<div id="app" style="display:none">
+<div id="app">
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="user-row">
+    <div class="user-row" id="user-row-guest" style="cursor:pointer" onclick="showLoginModal()">
+      <div class="avatar">👤</div>
+      <div class="username" style="color:var(--text-light)">點此登入</div>
+    </div>
+    <div class="user-row" id="user-row-loggedin" style="display:none">
       <div class="avatar">🐻</div>
       <div class="username" id="display-name">用戶名</div>
     </div>
+    <div class="nav-item" onclick="showHomepage()" style="display:flex;align-items:center;gap:6px;"><span style="font-size:11px">←</span> 所有場館</div>
     <div class="nav-item active">視野收藏夾</div>
     <div class="nav-item">我的履歷</div>
     <div class="nav-item">設定</div>
-    <div class="nav-item logout" onclick="handleLogout()">登出</div>
+    <div class="nav-item logout" id="logout-btn" onclick="handleLogout()" style="display:none">登出</div>
   </div>
 
   <!-- TOP BAR -->
@@ -630,6 +864,40 @@ body::before{
 <!-- LOADING -->
 <div id="loading-overlay"><div class="spinner"></div></div>
 
+<!-- LOGIN PROMPT -->
+<div id="login-modal-overlay">
+  <div class="login-prompt">
+    <button class="login-prompt-close" onclick="closeLoginModal()">✕</button>
+    <div class="login-prompt-icon">📍</div>
+    <div class="login-prompt-title">登入後才能新增</div>
+    <div class="login-prompt-sub">登入帳號後，你的視野圖會儲存在雲端，<br>換裝置也不會遺失。</div>
+    <div id="login-prompt-err" class="auth-err"></div>
+    <button class="auth-btn-google" onclick="handleGoogleLogin()">
+      <svg width="18" height="18" viewBox="0 0 48 48" style="flex-shrink:0">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+      </svg>
+      使用 Google 帳號登入
+    </button>
+    <div class="auth-divider">或使用 Email</div>
+    <div class="auth-tabs" style="margin-bottom:14px">
+      <div class="auth-tab active" id="ptab-login" onclick="switchPromptTab('login')">登入</div>
+      <div class="auth-tab" id="ptab-signup" onclick="switchPromptTab('signup')">註冊</div>
+    </div>
+    <div class="auth-field" style="text-align:left">
+      <div class="auth-label">Email</div>
+      <input class="auth-input" id="p-email" type="email" placeholder="your@email.com">
+    </div>
+    <div class="auth-field" style="text-align:left;margin-bottom:0">
+      <div class="auth-label">密碼</div>
+      <input class="auth-input" id="p-password" type="password" placeholder="至少 6 個字元">
+    </div>
+    <button class="auth-btn" id="p-auth-btn" onclick="handlePromptAuth()" style="margin-top:13px">登入</button>
+  </div>
+</div>
+
 <!-- PIN MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
@@ -737,11 +1005,15 @@ async function handleGoogleLogin() {
       options: { redirectTo: window.location.href }
     });
     if (error) throw error;
-    // Browser will redirect to Google — no further action needed here
+    // Browser will redirect to Google — pendingDropPin will be lost on redirect,
+    // that's acceptable. User can drag again after returning.
   } catch(e) {
-    showAuthErr(e.message || 'Google 登入失敗，請稍後再試');
-    btn.disabled = false;
-    btn.querySelector('svg').style.opacity = '1';
+    const msg = e.message || 'Google 登入失敗，請稍後再試';
+    // Show error in whichever context is visible
+    const promptErr = document.getElementById('login-prompt-err');
+    if (promptErr) { promptErr.textContent = msg; promptErr.classList.add('show'); }
+    else showAuthErr(msg);
+    if (btn) { btn.disabled = false; }
   }
 }
 
@@ -749,9 +1021,14 @@ async function handleLogout() {
   setLoading(true);
   await sbClient.auth.signOut();
   currentUser = null; pins = [];
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('auth-screen').style.display = 'flex';
+  // Restore sidebar guest state
+  document.getElementById('user-row-guest').style.display = 'flex';
+  document.getElementById('user-row-loggedin').style.display = 'none';
+  document.getElementById('logout-btn').style.display = 'none';
+  renderPins();
   setLoading(false);
+  showToast('已登出');
+  showHomepage();
 }
 
 function showAuthErr(msg) {
@@ -763,21 +1040,92 @@ function hideAuthErr() {
 }
 
 // ════════════════════════════════════════════════════════
+//  LOGIN PROMPT MODAL
+// ════════════════════════════════════════════════════════
+let pendingDropPin = null;
+let promptTab = 'login';
+
+function showLoginModal() {
+  document.getElementById('login-modal-overlay').classList.add('open');
+  document.getElementById('login-prompt-err').classList.remove('show');
+}
+function closeLoginModal() {
+  document.getElementById('login-modal-overlay').classList.remove('open');
+  pendingDropPin = null;
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLoginModal();
+});
+document.getElementById('login-modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('login-modal-overlay')) closeLoginModal();
+});
+
+function switchPromptTab(t) {
+  promptTab = t;
+  document.getElementById('ptab-login').classList.toggle('active', t === 'login');
+  document.getElementById('ptab-signup').classList.toggle('active', t === 'signup');
+  document.getElementById('p-auth-btn').textContent = t === 'login' ? '登入' : '註冊帳號';
+}
+
+async function handlePromptAuth() {
+  const email = document.getElementById('p-email').value.trim();
+  const pass  = document.getElementById('p-password').value;
+  if (!email || !pass) return;
+  const btn = document.getElementById('p-auth-btn');
+  btn.disabled = true; btn.textContent = '處理中...';
+  const errEl = document.getElementById('login-prompt-err');
+  errEl.classList.remove('show');
+  try {
+    let result;
+    if (promptTab === 'login') {
+      result = await sbClient.auth.signInWithPassword({ email, password: pass });
+    } else {
+      result = await sbClient.auth.signUp({ email, password: pass });
+    }
+    if (result.error) throw result.error;
+    if (promptTab === 'signup' && !result.data.session) {
+      errEl.textContent = '請到信箱確認後再登入';
+      errEl.classList.add('show');
+      btn.disabled = false; btn.textContent = '登入';
+      switchPromptTab('login'); return;
+    }
+    currentUser = result.data.user;
+    closeLoginModal();
+    await enterApp();
+    // Continue the drop action after login
+    if (pendingDropPin) {
+      pendingPin = pendingDropPin; pendingDropPin = null;
+      editingId = null; openModal(false);
+    }
+  } catch(err) {
+    const msg = err.message || '登入失敗';
+    errEl.textContent = msg.includes('Invalid login') ? 'Email 或密碼錯誤' : msg;
+    errEl.classList.add('show');
+    btn.disabled = false;
+    btn.textContent = promptTab === 'login' ? '登入' : '註冊帳號';
+  }
+}
+
+// ════════════════════════════════════════════════════════
 //  APP INIT  — called after successful login
 // ════════════════════════════════════════════════════════
 async function enterApp() {
   setLoading(true);
-  // Show username (use email prefix)
+  // Update sidebar
   const email = currentUser.email || '';
   document.getElementById('display-name').textContent = email.split('@')[0];
+  document.getElementById('user-row-guest').style.display = 'none';
+  document.getElementById('user-row-loggedin').style.display = 'flex';
+  document.getElementById('logout-btn').style.display = 'block';
+  // Update homepage header too
+  updateHpHeader();
 
-  // Load pins from Supabase
-  await loadPins();
-
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  applyTransform(false);
-  renderPins();
+  // If we're in venue view, reload pins; otherwise stay on homepage
+  const inVenue = document.getElementById('app').style.display !== 'none';
+  if (inVenue) {
+    await loadPins();
+    renderPins();
+  }
   setLoading(false);
 }
 
@@ -884,6 +1232,11 @@ function handleDrop(e) {
   const r = scaler.getBoundingClientRect();
   const x = Math.max(0, Math.min(581, (e.clientX - r.left) / scale));
   const y = Math.max(0, Math.min(585, (e.clientY - r.top)  / scale));
+  if (!currentUser) {
+    pendingDropPin = { x, y };   // remember where they dropped
+    showLoginModal();
+    return;
+  }
   pendingPin = { x, y }; editingId = null; openModal(false);
 }
 
@@ -1044,25 +1397,78 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2400);
 }
 
+
+// ════════════════════════════════════════════════════════
+//  HOMEPAGE & VENUE ROUTING
+// ════════════════════════════════════════════════════════
+function showHomepage() {
+  document.getElementById('homepage').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+  document.getElementById('homepage').style.overflow = 'auto';
+  // Update header login state
+  updateHpHeader();
+}
+
+function updateHpHeader() {
+  const loginBtn  = document.getElementById('hp-login-btn');
+  const userPill  = document.getElementById('hp-user-pill');
+  const nameEl    = document.getElementById('hp-display-name');
+  if (currentUser) {
+    loginBtn.style.display  = 'none';
+    userPill.style.display  = 'flex';
+    nameEl.textContent = (currentUser.email || '').split('@')[0];
+  } else {
+    loginBtn.style.display  = 'flex';
+    userPill.style.display  = 'none';
+  }
+}
+
+async function enterVenue(venueId) {
+  // Only linkou is ready
+  if (venueId !== 'linkou') return;
+  document.getElementById('homepage').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  // Pins already preloaded at boot — render immediately, no loading needed
+  applyTransform(false);
+  renderPins();
+}
+
+async function loadVenuePinCounts() {
+  try {
+    const { count } = await sbClient
+      .from('pins')
+      .select('*', { count: 'exact', head: true });
+    const el = document.getElementById('linkou-count');
+    if (el) el.textContent = '📍 ' + (count || 0) + ' 個視野圖';
+  } catch(e) { /* silent */ }
+}
+
 // ════════════════════════════════════════════════════════
 //  BOOT
 // ════════════════════════════════════════════════════════
 (async () => {
-  const ready = initSupabase();
+  initSupabase();
 
-  setLoading(true);
+  // Show homepage first, hide venue map
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('homepage').style.display = 'block';
 
-  // Handle OAuth callback — Supabase puts tokens in the URL hash after Google redirect
-  // getSession() automatically picks them up
+  // Preload pins in background so venue opens instantly
+  loadPins();
+  // Load venue pin counts for homepage cards
+  loadVenuePinCounts();
+
+  // Silently check for existing session (returning user / OAuth callback)
   const { data: { session } } = await sbClient.auth.getSession();
-
   if (session) {
     currentUser = session.user;
-    // Clean up the URL hash so tokens don't stay in the address bar
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
+    updateHpHeader();
     await enterApp();
   } else {
-    setLoading(false);
+    updateHpHeader();
   }
 })();
 </script>
